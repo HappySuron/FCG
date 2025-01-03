@@ -22,6 +22,11 @@ public class CardBase : MonoBehaviour
     private MeshRenderer planeRenderer;  // Ссылка на MeshRenderer плоскости
     private TextMeshPro powerText;       // Ссылка на TextMeshPro для силы
 
+    // Переменная для хранения созданного PrefabView
+    private GameObject activePrefabView;
+
+    // Флаг для отслеживания состояния PrefabView
+    private bool isPrefabViewActive = false;
 
     // Метод для инициализации карты
     public void Initialize(string name, int power, Texture2D cardArt, GameObject prefab)
@@ -31,7 +36,6 @@ public class CardBase : MonoBehaviour
         currentPower = power;
         art = cardArt;
         prefabToView = prefab;
-        currentPower = 8;
         UpdateCardVisuals();
     }
 
@@ -40,33 +44,23 @@ public class CardBase : MonoBehaviour
     {
         if (plane != null)
         {
-            planeRenderer = plane.GetComponent<MeshRenderer>();  // Получаем компонент MeshRenderer
+            planeRenderer = plane.GetComponent<MeshRenderer>();
         }
 
         if (powerObj != null)
         {
-            powerText = powerObj.GetComponent<TextMeshPro>();  // Получаем компонент TextMeshPro
+            powerText = powerObj.GetComponent<TextMeshPro>();
         }
 
-        // Устанавливаем арт на плоскости (текстуру на MeshRenderer)
         if (planeRenderer != null && art != null)
         {
-            Material planeMaterial = planeRenderer.material;  // Получаем материал
-            planeMaterial.mainTexture = art;  // Устанавливаем текстуру арта
-        }
-        else
-        {
-            Debug.LogError("Plane или MeshRenderer не найдены.");
+            Material planeMaterial = planeRenderer.material;
+            planeMaterial.mainTexture = art;
         }
 
-        // Устанавливаем силу на объекте powerObj
         if (powerText != null)
         {
-            powerText.text = currentPower.ToString();  // Отображаем текущую силу
-        }
-        else
-        {
-            Debug.LogError("PowerObj или TextMeshPro не найдены.");
+            powerText.text = currentPower.ToString();
         }
     }
 
@@ -74,7 +68,7 @@ public class CardBase : MonoBehaviour
     public void ChangePower(int amount)
     {
         currentPower += amount;
-        UpdateCardVisuals(); // Обновляем отображение после изменения силы
+        UpdateCardVisuals();
     }
 
     // Метод для установки позиции карты
@@ -83,5 +77,44 @@ public class CardBase : MonoBehaviour
         transform.position = position;
         curLine = lineIndex;
         curPosInLine = positionInLine;
+    }
+
+    // Метод для управления PrefabView
+    private void HandlePrefabView()
+    {
+        if (activePrefabView == null) // Если объект не создан
+        {
+            activePrefabView = Instantiate(prefabToView, new Vector3(0, 20, 44), Quaternion.Euler(270, 0, 0));
+            isPrefabViewActive = true; // Устанавливаем флаг активности
+        }
+        else // Если объект уже создан
+        {
+            Destroy(activePrefabView);
+            activePrefabView = null;
+            isPrefabViewActive = false; // Сбрасываем флаг
+        }
+    }
+
+    // Unity событие: вызывается при наведении мыши
+    public void OnMouseOver()
+    {
+        Debug.Log("Mouse is over the object.");
+        if (Input.GetMouseButtonDown(1)) // ПКМ
+        {
+            Debug.Log("Right Mouse Button clicked.");
+            HandlePrefabView();
+        }
+    }
+
+    // Проверяем глобальные клики
+    private void Update()
+    {
+        if (isPrefabViewActive && Input.GetMouseButtonDown(0)) // ЛКМ в любом месте
+        {
+            Debug.Log("Click outside, closing PrefabView.");
+            Destroy(activePrefabView);
+            activePrefabView = null;
+            isPrefabViewActive = false; // Сбрасываем флаг
+        }
     }
 }
