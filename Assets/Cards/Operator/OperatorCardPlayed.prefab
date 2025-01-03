@@ -102,7 +102,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1
+  m_text: 2
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 2922081087143585977}
   - component: {fileID: 3913337287436813924}
   m_Layer: 0
-  m_Name: ArchivariusCardPlayed
+  m_Name: OperatorCardPlayed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -301,11 +301,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6093fea4498e7ba4a88d8c7c5da6d135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardName: Archivarius
+  cardName: Operator
   originalPower: 1
   currentPower: 1
-  art: {fileID: 2800000, guid: dc2b95c8c1b5b114d9ba2997a311ee71, type: 3}
-  prefabToView: {fileID: 4034796074935383683, guid: 85aa8f7ff048ac34db5c8b65d56e69af, type: 3}
+  art: {fileID: 2800000, guid: f08b7620b28d1404ab5f879854927c99, type: 3}
+  prefabToView: {fileID: 4034796074935383683, guid: a2bbc19a978af344b8c0a0fad5983d34, type: 3}
   isInHand: 1
   curLine: 0
   curPosInLine: 0
@@ -485,7 +485,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b0e0c0c400ded944e96f09de92568783, type: 2}
+  - {fileID: 2100000, guid: fe35466ae2cf05349a54047d942604a3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -594,7 +594,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 36669db9648e3c448909772166dd5a44, type: 2}
+  - {fileID: 2100000, guid: fed5c19d4c613834681980f9d786b9cf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
