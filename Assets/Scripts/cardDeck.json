@@ -1,0 +1,11 @@
+{
+    "deckName": "My First Deck",
+    "cards": [
+      { "id": "cardAI" },
+      { "id": "cardAI" },
+      { "id": "cardSlv" },
+      { "id": "cardSlv" },
+      { "id": "cardAI" }
+    ]
+  }
+  
