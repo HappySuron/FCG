@@ -1,3 +1,4 @@
+using DG.Tweening;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -105,5 +106,42 @@ public class CardBase : MonoBehaviour, IPointerClickHandler
     {
         //GameManager.Instance.goFurther =
         // Debug.Log("It seems that that card doesnt have a override " + cardName);
+    }
+
+    public virtual void EnterAnimation(){
+        Debug.Log("SLV");
+        transform.localScale = Vector3.one * 1.5f;
+        transform.DOScale(Vector3.one * 1.3f, 0.3f).SetEase(Ease.OutQuad);
+    }
+
+    public void DestroyCard()
+    {   
+    transform.DOScale(Vector3.one * 1.1f, 0.3f).SetEase(Ease.InOutSine)
+        .OnComplete(() => 
+            transform.DOScale(Vector3.zero, 0.3f).SetEase(Ease.OutSine)
+                .OnComplete(() => 
+                {
+                    // Убираем объект из дочерних объектов текущего родителя
+                    transform.SetParent(null);
+                    GameManager.Instance.UpdateAllRowStats();
+                    // Удаляем объект из сцены после анимации
+                    Destroy(gameObject);
+                }));
+    }
+
+
+    public void ChangeCurCardPower(int amount){
+        cardPowerCurrent = cardPowerCurrent + amount;
+        cardPowerCurrent = Mathf.Max(0, cardPowerCurrent);
+        if (cardPowerCurrent == cardPowerBase){
+            cardPower.color = Color.black;
+        }
+        else if (cardPowerCurrent > cardPowerBase){
+            cardPower.color = new Color(0, 0.5f, 0);;
+        }
+        else if (cardPowerCurrent < cardPowerBase){
+            cardPower.color = new Color(0.5f, 0, 0);
+        }
+        cardPower.text = cardPowerCurrent.ToString();
     }
 }

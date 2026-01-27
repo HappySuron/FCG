@@ -60,7 +60,7 @@ public class Player : MonoBehaviour
     public void DrawCards(int amount)
     {
         if (curPlayersDeck.Count ==0){
-            Debug.LogError("NO CARD TO DRAW CONSIDER AS LOSE");
+            //Debug.LogError("NO CARD TO DRAW CONSIDER AS LOSE");
             return;
         }
         // Проверка, чтобы в руке не было больше 10 карт
@@ -101,14 +101,14 @@ public class Player : MonoBehaviour
                     if (cardBase.cardType == row.GetComponent<RowClick>().thisRowType || cardBase.cardType == CardType.Special)
                     {
                         chosenCardToPlay.transform.SetParent(row.GetComponent<RowClick>().cardContainer, false);
-                        chosenCardToPlay.transform.localPosition = Vector3.zero;
+                        //chosenCardToPlay.transform.localPosition = Vector3.zero;
 
-                        chosenCardToPlay.transform.localScale = Vector3.one * 1.5f;
+                        // chosenCardToPlay.transform.localScale = Vector3.one * 1.5f;
 
-                        // Плавное уменьшение масштаба до нормального размера
-                        chosenCardToPlay.transform.DOScale(Vector3.one*1.3f, 0.3f).SetEase(Ease.OutQuad);
+                        // // Плавное уменьшение масштаба до нормального размера
+                        // chosenCardToPlay.transform.DOScale(Vector3.one*1.3f, 0.3f).SetEase(Ease.OutQuad);
 
-
+                        chosenCardToPlay.GetComponent<CardBase>().EnterAnimation();
 
                         chosenCardToPlay.GetComponent<CardBase>().ApplyEffect();
                         chosenCardToPlay.GetComponent<CardBase>().isCardinHand = false;
@@ -164,16 +164,17 @@ public class Player : MonoBehaviour
                 if (cardBase.cardType == row.GetComponent<RowClick>().thisRowType || cardBase.cardType == CardType.Special)
                 {
                     // Добавляем карту в контейнер ряда
-                    cardInstance.transform.SetParent(row.GetComponent<RowClick>().cardContainer, false);
-                    cardInstance.transform.localPosition = Vector3.zero;
+                    cardBase.transform.SetParent(row.GetComponent<RowClick>().cardContainer, false);
+                    //cardInstance.transform.localPosition = Vector3.zero;
 
                     // Увеличиваем масштаб карты при добавлении
-                    cardInstance.transform.localScale = Vector3.one * 1.5f;
+                    // cardInstance.transform.localScale = Vector3.one * 1.5f;
 
-                    // Плавное уменьшение масштаба до нормального размера
-                    cardInstance.transform.DOScale(Vector3.one*1.3f, 0.3f).SetEase(Ease.OutQuad);
+                    // // Плавное уменьшение масштаба до нормального размера
+                    // cardInstance.transform.DOScale(Vector3.one*1.3f, 0.3f).SetEase(Ease.OutQuad);
 
                     // Применяем эффекты карты и меняем её статус
+                    cardBase.GetComponent<CardBase>().EnterAnimation();
                     cardBase.ApplyEffect();
                     cardBase.isCardinHand = false;
                     

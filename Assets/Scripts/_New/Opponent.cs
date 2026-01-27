@@ -55,7 +55,7 @@ public class Opponent : MonoBehaviour
     public void DrawCards(int amount)
     {
         if (curOpponentDeck.Count ==0){
-            Debug.LogError("NO CARD TO DRAW CONSIDER AS LOSE");
+            //Debug.LogError("NO CARD TO DRAW CONSIDER AS LOSE");
             return;
         }
         if (handArea.childCount >= maxHandCount)
@@ -152,12 +152,12 @@ public class Opponent : MonoBehaviour
         if (cardBase != null)
         {
             cardToPlay.transform.SetParent(row.GetComponent<RowClick>().cardContainer, false);
-            cardToPlay.transform.localPosition = Vector3.zero;
-            cardToPlay.transform.localScale = Vector3.one * 1.5f;
+            //cardToPlay.transform.localPosition = Vector3.zero;
+            // cardToPlay.transform.localScale = Vector3.one * 1.5f;
 
-            // Анимация уменьшения до нормального размера
-            cardToPlay.transform.DOScale(Vector3.one * 1.3f, 0.3f).SetEase(Ease.OutQuad);
-
+            // // Анимация уменьшения до нормального размера
+            // cardToPlay.transform.DOScale(Vector3.one * 1.3f, 0.3f).SetEase(Ease.OutQuad);
+            cardBase.GetComponent<CardBase>().EnterAnimation();
             cardBase.ApplyEffect();
             cardBase.isCardinHand = false;
 
@@ -192,15 +192,16 @@ public class Opponent : MonoBehaviour
                 {
                     // Добавляем карту в контейнер ряда оппонента
                     cardInstance.transform.SetParent(row.GetComponent<RowClick>().cardContainer, false);
-                    cardInstance.transform.localPosition = Vector3.zero;
+                    //cardInstance.transform.localPosition = Vector3.zero;
 
-                    // Увеличиваем масштаб карты при добавлении
-                    cardInstance.transform.localScale = Vector3.one * 1.5f;
+                    // // Увеличиваем масштаб карты при добавлении
+                    // cardInstance.transform.localScale = Vector3.one * 1.5f;
 
-                    // Плавное уменьшение масштаба до нормального размера
-                    cardInstance.transform.DOScale(Vector3.one * 1.3f, 0.3f).SetEase(Ease.OutQuad);
+                    // // Плавное уменьшение масштаба до нормального размера
+                    // cardInstance.transform.DOScale(Vector3.one * 1.3f, 0.3f).SetEase(Ease.OutQuad);
 
                     // Применяем эффекты карты и меняем её статус
+                    cardBase.GetComponent<CardBase>().EnterAnimation();
                     cardBase.ApplyEffect();
                     cardBase.isCardinHand = false;
 

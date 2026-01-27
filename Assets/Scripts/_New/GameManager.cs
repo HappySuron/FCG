@@ -308,12 +308,16 @@ public class GameManager : MonoBehaviour
 
     public void ChangeCurTokens(bool isPlayer, int amount){
         if (isPlayer){
-            curTokensPlayer+=amount;
-            curTokensPlayerObj.text=curTokensPlayer.ToString();
+            curTokensPlayer += amount;
+            // Убедитесь, что количество токенов не опустится ниже 0
+            curTokensPlayer = Mathf.Max(0, curTokensPlayer);
+            curTokensPlayerObj.text = curTokensPlayer.ToString();
         }
         else {
-            curTokensOpponent+=amount;
-            curTokensOpponentObj.text=curTokensOpponent.ToString();
+            curTokensOpponent += amount;
+            // Убедитесь, что количество токенов не опустится ниже 0
+            curTokensOpponent = Mathf.Max(0, curTokensOpponent);
+            curTokensOpponentObj.text = curTokensOpponent.ToString();
         }
     }
 
